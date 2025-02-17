@@ -1,11 +1,14 @@
 import PyPDF2
+import os
 
 def extract_pages(input_pdf):
     while True:
         try:
-            start_page = int(input("Enter the start page (or 0 to exit): "))
-            if start_page == 0:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            start_page = input("Enter the start page (or 'q' to exit): ")
+            if start_page.lower() == 'q':
                 break
+            start_page = int(start_page)
             end_page = int(input("Enter the end page: "))
 
             if start_page > end_page or start_page < 1:
@@ -29,11 +32,13 @@ def extract_pages(input_pdf):
                     writer.write(output)
                 
                 print(f"Pages {start_page} to {end_page} saved as {output_pdf}.")
+                input("Press Enter to continue...")
         except ValueError:
             print("Invalid input. Please enter numbers.")
         except Exception as e:
             print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
+    os.system('cls' if os.name == 'nt' else 'clear')
     pdf_file = input("Enter the PDF filename: ")
     extract_pages(pdf_file)
